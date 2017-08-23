@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ -z $1 ];
+then
+	echo 'Missing Imagename'
+	echo 'Mount_Image <Imagename> [Path]'
+	exit -1
+	
+fi
+
+if [ -z $2 ];
+then
+	echo 'Missing Path, mounting to /mnt'
+	mount -o loop,ro $1 /mnt
+	
+else
+	echo "Mounting $1 on $2"
+	mount -o loop,ro $1 $2
+	
+fi
+	

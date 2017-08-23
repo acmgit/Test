@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [ -z $1 ];
+then
+	echo 'Missing Filename'
+	echo 'Restore_Device <Imagename> <Device> [Size]'
+	exit -1
+fi
+
+if [ -z $2 ];
+then
+	echo 'Missing Device'
+	echo 'Restore_Device <Imagename> <Device> [Size]'
+	exit -1
+fi
+
+if [ -z $3 ];
+then
+	echo Unmounting Device
+	umount /dev/$2?
+	
+	echo Restore Card from Image
+	dd if=$1 of=$2 1M
+	
+else
+	#umount /dev/$2?
+	echo Unmounting Device
+	umount /dev/$2?
+	
+	echo Restore Card from Image
+	dd if=$1 of=$2 $3
+
+fi

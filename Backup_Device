@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ -z $1];
+then
+	echo 'Missing Filename'
+	echo 'Backup_Device <Imagename> <Device> [Size]'
+	exit -1
+fi
+
+if [ -z $2];
+then
+	echo 'Missing Device'
+	echo 'Backup_Device <Imagename> <Device> [Size]'
+	exit -1
+fi
+
+if [ -z $3];
+then 
+	$3 = '1M'
+fi
+
+echo Unmounting Device
+umount /dev/$2?
+echo Copy Device to Image
+dd if=/dev/$2 of=$1 bs=$3 status=progress 
